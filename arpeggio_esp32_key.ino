@@ -13,6 +13,7 @@ const int led3 = 23;
 int nPressed = 0;
 int nButton;
 int contador;
+boolean up;
 
 unsigned long previousTimeLed1 = millis();
 long timeIntervalLed1 = 500;
@@ -33,6 +34,7 @@ void setup() {
   pinMode(led3, OUTPUT);
   nButton = 0;
   contador = 0;
+  up = true;
 }
 
 void loop() {
@@ -93,6 +95,7 @@ void loop() {
   
    if(currentTime - previousTimeLed1 > timeIntervalLed1) {
     previousTimeLed1 = currentTime;
+    // Normal
     if (nPressed > contador) {
       offLeds();
       onLed(buttons[contador]);
@@ -101,6 +104,37 @@ void loop() {
         contador = 0; 
       }
     }
+    // Pong
+    /*
+     * if (nPressed > contador) {
+      offLeds();
+      onLed(buttons[contador]);
+      Serial.println(contador);
+      if (up) {
+        contador = contador + 1;
+        if (contador == nPressed) {
+          contador = contador - 1;
+          up = false; 
+        } 
+      }
+      else {
+        contador = contador - 1;
+        if (contador < 0) {
+          contador = 0;
+          up = true; 
+        }
+      }
+    }
+     */
+    // Random
+    /*
+    if (nPressed > 0) {
+      contador = random(nPressed);
+      Serial.println(contador);
+      offLeds();
+      onLed(buttons[contador]);
+    }
+    */
   }
 }
 
